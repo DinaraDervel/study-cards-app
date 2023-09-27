@@ -1,3 +1,4 @@
+import CheckButton from "../../Buttons/CheckButton/CheckButton";
 import s from "./Card.module.scss";
 
 export default function Card(props) {
@@ -10,7 +11,7 @@ export default function Card(props) {
       <p className={s.card__english}>{english}</p>
       <p className={s.card__transcription}>{transcription}</p>
       <p className={s.card__russian}>{russian}</p>
-      {/* <CheckButton /> */}
+      <CheckButton />
     </div>
   );
 }
