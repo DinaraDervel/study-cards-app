@@ -4,27 +4,29 @@ import { NavLink } from "react-router-dom";
 export default function Header() {
   return (
     <header>
-      <h1>Let's learn some words! / Давай выучим слова!</h1>
-      <nav>
-        <ul className={s.horizontal_nav}>
-          <li>
-            <NavLink
-              className={(navData) => (navData.isActive ? s.activeLink : "")}
-              to="/table"
-            >
-              Все слова
-            </NavLink>
-          </li>
-          <li>
-            <NavLink
-              className={(navData) => (navData.isActive ? s.activeLink : "")}
-              to="/carousel"
-            >
-              Учить слова
-            </NavLink>
-          </li>
-        </ul>
-      </nav>
+      <div className={s.wrapper}>
+        <img src="./logo.png" alt="logo" className={s.logo} />
+        <nav>
+          <ul className={s.horizontal_nav}>
+            <li>
+              <NavLink
+                className={(navData) => (navData.isActive ? s.activeLink : "")}
+                to="/table"
+              >
+                Список слов
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                className={(navData) => (navData.isActive ? s.activeLink : "")}
+                to="/carousel"
+              >
+                Учить слова
+              </NavLink>
+            </li>
+          </ul>
+        </nav>
+      </div>
     </header>
   );
 }

@@ -13,7 +13,7 @@ function App() {
         <div className='app-wrapper-content'>
           <Routes>
             <Route path='carousel' element={<Carousel data={data[0]} />} />
-            <Route path='table' element={<Table data={data[0]} />} />
+            <Route path='table' element={<Table data={data} />} />
           </Routes>
         </div>
         {/* <Footer /> */}

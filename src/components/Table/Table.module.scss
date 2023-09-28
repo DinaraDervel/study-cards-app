@@ -1,0 +1,36 @@
+.wrapper {
+  width: 90%;
+  max-width: 1170px;
+  margin: 0 auto;
+}
+.table {
+  margin-top: 2rem;
+  border-collapse: collapse;
+  width: 100%;
+  font-size: 1.5rem;
+  background-color: #d4feec;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+}
+thead {
+  font-size: 2rem;
+  tr {
+    background-color: #71a4cd;
+    color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+  }
+}
+table,
+th,
+td {
+  border: 1px solid;
+}
+th,
+td {
+  padding: 15px;
+  text-align: left;
+}
+tbody > tr:hover {
+  background-color: rgb(188, 200, 237);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+  cursor: pointer;
+}

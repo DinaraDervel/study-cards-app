@@ -1,5 +1,6 @@
 import EditButton from "../../Buttons/EditButton/EditButton";
-import SaveButton from "../../Buttons/SaveButton/SaveButton";
+import DeleteButton from "../../Buttons/DeleteButton/DeleteButton";
+// import SaveButton from "../../Buttons/SaveButton/SaveButton";
 
 export default function Row(props) {
   const {
@@ -12,7 +13,8 @@ export default function Row(props) {
       <th>{russian}</th>
       <th>
         <EditButton />
-        <SaveButton />
+        <DeleteButton />
+        {/* <SaveButton /> */}
       </th>
     </tr>
   );
