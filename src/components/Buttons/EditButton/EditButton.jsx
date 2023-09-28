@@ -1,6 +1,13 @@
-export default function EditButton() {
+import s from "./EditButton.module.scss";
+
+export default function EditButton(props) {
   return (
-    <button>
+    <button
+      className={s.button}
+      onClick={() => {
+        props.onClick(props.id);
+      }}
+    >
       <svg
         xmlns="http://www.w3.org/2000/svg"
         id="Outline"

@@ -34,3 +34,12 @@ tbody > tr:hover {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
   cursor: pointer;
 }
+.editedRow {
+  background-color: rgb(188, 200, 237);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+
+  & input {
+    font-size: 1.5rem;
+    border-radius: 5px;
+  }
+}

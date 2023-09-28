@@ -1,8 +1,8 @@
-import "./DeleteButton.module.scss";
+import s from "./DeleteButton.module.scss";
 
 export default function DeleteButton() {
   return (
-    <button>
+    <button className={s.button}>
       <svg
         xmlns="http://www.w3.org/2000/svg"
         id="Isolation_Mode"
