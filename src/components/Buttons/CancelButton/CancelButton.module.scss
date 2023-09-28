@@ -1,5 +1,8 @@
+@import "../../../variables.scss";
+
 .button {
-  border: 1px solid;
+  border: 5px solid $customRed;
+  color: $customRed;
   border-radius: 5px;
   padding: 5px;
   margin: 5px;

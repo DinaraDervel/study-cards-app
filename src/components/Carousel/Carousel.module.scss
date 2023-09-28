@@ -1,4 +1,5 @@
-$card-size: 23rem;
+@import "../../variables.scss";
+
 .wrapper {
   width: 90%;
   max-width: 1170px;
@@ -8,6 +9,7 @@ $card-size: 23rem;
   margin: 2rem auto 0;
   width: $card-size;
   height: $card-size;
+
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -16,7 +18,7 @@ $card-size: 23rem;
 .nav {
   cursor: pointer;
   display: inline-block;
-  background-color: #327cb8;
+  background-color: $customBlue;
   color: #ffffff;
   border: none;
   border-radius: 50%;

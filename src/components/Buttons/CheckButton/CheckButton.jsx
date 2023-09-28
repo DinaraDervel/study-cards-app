@@ -1,5 +1,9 @@
-// import s from "./CheckButton.module.scss";
+import s from "./CheckButton.module.scss";
 
-export default function CheckButton() {
-  return <button type="button">Проверить</button>;
+export default function CheckButton(props) {
+  return (
+    <button className={s.button} onClick={() => props.onClick()}>
+      Проверить
+    </button>
+  );
 }

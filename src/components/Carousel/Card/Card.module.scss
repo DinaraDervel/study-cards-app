@@ -1,31 +1,39 @@
-$color-green: #3df84d;
-$color-mint: #57f9d6;
-$color-gray: #9ca3af;
-$color-black: #1f2937;
+@import "../../../variables.scss";
 
 .card {
+  min-width: $card-size;
+  height: $card-size;
   width: 100%;
   height: 100%;
   padding: 2rem;
-  background-image: linear-gradient(45deg, $color-green, $color-mint);
+  background-image: linear-gradient(65deg, $customGreen, $customMint);
   border-radius: 1rem;
-  color: $color-gray;
+  color: $customGray;
   text-align: justify;
   transition: all 0.3s ease-out;
 
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+
   p {
     text-align: center;
-    margin: 0 0 0.7em;
+    margin: 0;
   }
 
-  &__english,
-  &__russian {
+  &__english {
     font-size: 2rem;
     font-weight: bold;
-    color: $color-black;
+    color: $customBlue;
   }
   &__transcription {
     font-size: 1.5rem;
-    color: $color-gray;
+    color: $customBlack;
+  }
+  &__russian {
+    font-size: 2rem;
+    font-weight: bold;
+    color: $customRed;
   }
 }

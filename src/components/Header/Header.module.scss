@@ -1,7 +1,8 @@
+@import "../../variables.scss";
+
 header {
   padding-top: 2rem;
   background-color: #71a4cd;
-  color: #fff;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
 }
 .wrapper {
@@ -25,10 +26,17 @@ header {
   a {
     padding: 5px;
     text-decoration: none;
-    color: #fff;
   }
   a:hover,
   a:active {
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.4);
   }
+}
+.table {
+  color: $customGreen;
+  font-weight: 700;
+}
+.carousel {
+  color: $customRed;
+  font-weight: 700;
 }

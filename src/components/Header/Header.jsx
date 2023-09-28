@@ -9,18 +9,12 @@ export default function Header() {
         <nav>
           <ul className={s.horizontal_nav}>
             <li>
-              <NavLink
-                className={(navData) => (navData.isActive ? s.activeLink : "")}
-                to="/table"
-              >
+              <NavLink className={s.table} to="/table">
                 Список слов
               </NavLink>
             </li>
             <li>
-              <NavLink
-                className={(navData) => (navData.isActive ? s.activeLink : "")}
-                to="/carousel"
-              >
+              <NavLink className={s.carousel} to="/carousel">
                 Учить слова
               </NavLink>
             </li>
