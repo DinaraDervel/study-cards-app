@@ -7,23 +7,50 @@ import s from "../Table.module.scss";
 export default function Row(props) {
   const {
     data: { id, english, transcription, russian },
+    onEditClick,
+    onRowChange,
+    selectedId,
+    changesSaved,
+    onSaveClick,
+    onCancelClick,
   } = props;
+
   return (
     <>
-      {props.selectedId === id ? (
+      {selectedId === id ? (
         <tr className={s.editedRow}>
           <th>
-            <input value={english}></input>
+            <input
+              defaultValue={english}
+              onChange={(event) => {
+                onRowChange(id, "english", event.target.value, changesSaved);
+              }}
+            ></input>
           </th>
           <th>
-            <input value={transcription}></input>
+            <input
+              defaultValue={transcription}
+              onChange={(event) => {
+                onRowChange(
+                  id,
+                  "transcription",
+                  event.target.value,
+                  changesSaved
+                );
+              }}
+            ></input>
           </th>
           <th>
-            <input value={russian}></input>
+            <input
+              defaultValue={russian}
+              onChange={(event) => {
+                onRowChange(id, "russian", event.target.value, changesSaved);
+              }}
+            ></input>
           </th>
           <th>
-            <SaveButton />
-            <CancelButton />
+            <SaveButton onClick={onSaveClick} changesSaved={changesSaved} />
+            <CancelButton onClick={onCancelClick} id={id} />
           </th>
         </tr>
       ) : (
@@ -32,7 +59,7 @@ export default function Row(props) {
           <th>{transcription}</th>
           <th>{russian}</th>
           <th>
-            <EditButton id={id} onClick={props.onClick} />
+            <EditButton id={id} onClick={onEditClick} />
             <DeleteButton />
           </th>
         </tr>
