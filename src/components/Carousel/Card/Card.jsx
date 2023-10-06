@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import CheckButton from "../../Buttons/CheckButton/CheckButton";
 import s from "./Card.module.scss";
 
@@ -10,8 +10,9 @@ export default function Card(props) {
   const [isClicked, setClicked] = useState(false);
 
   const onCheckButtonClick = () => {
-    setClicked(!isClicked);
+    setClicked(true);
   };
+
   return (
     <div className={s.card}>
       <p className={s.card__english}>{english}</p>

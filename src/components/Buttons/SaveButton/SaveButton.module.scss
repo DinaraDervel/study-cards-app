@@ -9,4 +9,13 @@
   &:hover {
     transform: scale(1.2, 1.2);
   }
+
+  &_saved {
+    background-color: $customGreen;
+    color: white;
+    &:hover {
+      transform: none;
+      cursor: default;
+    }
+  }
 }

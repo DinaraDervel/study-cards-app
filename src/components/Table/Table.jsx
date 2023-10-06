@@ -3,22 +3,18 @@ import s from "./Table.module.scss";
 import { useState } from "react";
 
 export default function Table(props) {
+  const [words, setWords] = useState(props.data);
+
+  //set selected row
   const [selectedId, setSelectedId] = useState(null);
 
   const onEditClick = (id) => {
+    setChangesSaved(false);
     setSelectedId(id);
   };
 
-  const onRowChange = (wordId, field, newValue, changesSaved) => {
-    const newWords = props.data.map((el) => {
-      el[field] = el.id === wordId ? newValue : el[field];
-      return el;
-    });
-    if (changesSaved) props.setWords(newWords);
-    else props.setWords(props.data);
-  };
-
   const [changesSaved, setChangesSaved] = useState(false);
+
   const onSaveClick = () => {
     setChangesSaved(true);
   };
@@ -27,7 +23,19 @@ export default function Table(props) {
     setSelectedId(null);
   };
 
-  let rowsWithWords = props.data.map((word) => (
+  const onRowChange = (wordId, field, newValue, changesSaved) => {
+    const savedWords = JSON.parse(localStorage.getItem("words"));
+    const newWords = savedWords.map((el) => {
+      el[field] = el.id === wordId ? newValue : el[field];
+      return el;
+    });
+    if (changesSaved) {
+      setWords(newWords);
+      localStorage.setItem("words", JSON.stringify(newWords));
+    }
+  };
+
+  let rowsWithWords = words.map((word) => (
     <Row
       data={word}
       key={word.id}

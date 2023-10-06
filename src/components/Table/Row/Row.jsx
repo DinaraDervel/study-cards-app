@@ -50,7 +50,7 @@ export default function Row(props) {
           </th>
           <th>
             <SaveButton onClick={onSaveClick} changesSaved={changesSaved} />
-            <CancelButton onClick={onCancelClick} id={id} />
+            <CancelButton onClick={onCancelClick} />
           </th>
         </tr>
       ) : (
