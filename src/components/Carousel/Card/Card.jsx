@@ -13,6 +13,10 @@ export default function Card(props) {
     setClicked(true);
   };
 
+  useEffect(() => {
+    setClicked(false);
+  }, [props]);
+
   return (
     <div className={s.card}>
       <p className={s.card__english}>{english}</p>
