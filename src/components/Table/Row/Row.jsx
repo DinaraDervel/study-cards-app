@@ -3,17 +3,29 @@ import DeleteButton from "../../Buttons/DeleteButton/DeleteButton";
 import SaveButton from "../../Buttons/SaveButton/SaveButton";
 import CancelButton from "../../Buttons/CancelButton/CancelButton";
 import s from "../Table.module.scss";
+import { useState } from "react";
 
 export default function Row(props) {
   const {
     data: { id, english, transcription, russian },
     onEditClick,
-    onRowChange,
     selectedId,
-    changesSaved,
     onSaveClick,
     onCancelClick,
   } = props;
+
+  const [editedWord, setEditedWord] = useState({
+    id: id,
+    english: english,
+    transcription: transcription,
+    russian: russian,
+  });
+
+  const onRowChange = (fieldName, newValue) => {
+    editedWord[fieldName] = newValue;
+    setEditedWord(editedWord);
+    localStorage.setItem("editedWord", JSON.stringify(editedWord));
+  };
 
   return (
     <>
@@ -21,35 +33,30 @@ export default function Row(props) {
         <tr className={s.editedRow}>
           <th>
             <input
-              defaultValue={english}
+              defaultValue={editedWord.english}
               onChange={(event) => {
-                onRowChange(id, "english", event.target.value, changesSaved);
+                onRowChange("english", event.target.value);
               }}
             ></input>
           </th>
           <th>
             <input
-              defaultValue={transcription}
+              defaultValue={editedWord.transcription}
               onChange={(event) => {
-                onRowChange(
-                  id,
-                  "transcription",
-                  event.target.value,
-                  changesSaved
-                );
+                onRowChange("transcription", event.target.value);
               }}
             ></input>
           </th>
           <th>
             <input
-              defaultValue={russian}
+              defaultValue={editedWord.russian}
               onChange={(event) => {
-                onRowChange(id, "russian", event.target.value, changesSaved);
+                onRowChange("russian", event.target.value);
               }}
             ></input>
           </th>
           <th>
-            <SaveButton onClick={onSaveClick} changesSaved={changesSaved} />
+            <SaveButton onClick={onSaveClick} />
             <CancelButton onClick={onCancelClick} />
           </th>
         </tr>

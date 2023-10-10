@@ -1,6 +1,6 @@
 import Card from "./Card/Card";
 import s from "./Carousel.module.scss";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 export default function Carousel(props) {
   const [idOfShownWord, setShownWord] = useState(props.isShown);

@@ -1,12 +1,24 @@
 import s from "./SaveButton.module.scss";
+import { useState } from "react";
 
 export default function SaveButton(props) {
+  const [isClicked, setClicked] = useState(false);
+
+  const onButtonClick = () => {
+    setClicked(true);
+  };
   return (
     <>
-      {props.changesSaved ? (
+      {isClicked ? (
         <button className={s.button + " " + s.button_saved}>Сохранено</button>
       ) : (
-        <button className={s.button} onClick={() => props.onClick()}>
+        <button
+          className={s.button}
+          onClick={() => {
+            props.onClick();
+            onButtonClick();
+          }}
+        >
           Сохранить
         </button>
       )}
