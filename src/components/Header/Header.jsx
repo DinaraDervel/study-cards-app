@@ -5,9 +5,15 @@ export default function Header() {
   return (
     <header>
       <div className={s.wrapper}>
-        <img src="./logo.png" alt="logo" className={s.logo} />
         <nav>
           <ul className={s.horizontal_nav}>
+            <li>
+              <NavLink to="/">
+                <div>
+                  <img src="./logo.png" alt="logo" />
+                </div>
+              </NavLink>
+            </li>
             <li>
               <NavLink className={s.table} to="/table">
                 Список слов

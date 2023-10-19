@@ -33,7 +33,7 @@ export default function Row(props) {
         <tr className={s.editedRow}>
           <th>
             <input
-              defaultValue={editedWord.english}
+              defaultValue={english}
               onChange={(event) => {
                 onRowChange("english", event.target.value);
               }}
@@ -41,7 +41,7 @@ export default function Row(props) {
           </th>
           <th>
             <input
-              defaultValue={editedWord.transcription}
+              defaultValue={transcription}
               onChange={(event) => {
                 onRowChange("transcription", event.target.value);
               }}
@@ -49,7 +49,7 @@ export default function Row(props) {
           </th>
           <th>
             <input
-              defaultValue={editedWord.russian}
+              defaultValue={russian}
               onChange={(event) => {
                 onRowChange("russian", event.target.value);
               }}

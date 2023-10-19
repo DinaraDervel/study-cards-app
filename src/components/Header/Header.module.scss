@@ -2,30 +2,45 @@
 
 header {
   padding-top: 2rem;
+  padding-bottom: 2rem;
   background-color: #71a4cd;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+  top: 0;
+  z-index: 100;
+  width: 100%;
+  position: fixed;
 }
 .wrapper {
   width: 90%;
   max-width: 1170px;
   margin: 0 auto;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-}
-.logo {
-  width: 500px;
-  max-width: 100%;
 }
 .horizontal_nav {
+  margin: 0;
+  padding: 0;
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
   gap: 2rem;
   list-style: none;
   font-size: 2rem;
   a {
-    padding: 5px;
     text-decoration: none;
+    div {
+      width: 100%;
+      height: 100%;
+    }
+    img {
+      max-width: 500px;
+      width: 100%;
+      height: 100%;
+    }
+    img:hover,
+    img:active {
+      box-shadow: 0 0 20px rgba(255, 255, 255, 0.4);
+    }
   }
   a:hover,
   a:active {
