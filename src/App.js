@@ -1,7 +1,8 @@
-import Carousel from './components/Carousel/Carousel';
-import Header from './components/Header/Header'
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import Carousel from './components/Carousel/Carousel';
+import Header from './components/Header/Header';
 import Table from './components/Table/Table';
+import NoMatch from './components/NoMatch/NoMatch';
 import data from "./data/data.json";
 import './App.css'
 
@@ -17,6 +18,7 @@ function App() {
             <Route exact path='/' element={<Table data={data} />} />
             <Route path='table' element={<Table data={data} />} />
             <Route path='carousel' element={<Carousel data={data} isShown={0} />} />
+            <Route path="*" element={<NoMatch />} />
           </Routes>
         </div>
         {/* <Footer /> */}
