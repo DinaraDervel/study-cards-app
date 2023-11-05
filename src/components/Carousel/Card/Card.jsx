@@ -1,16 +1,18 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import CheckButton from "../../Buttons/CheckButton/CheckButton";
 import s from "./Card.module.scss";
 
 export default function Card(props) {
   const {
     item: { english, transcription, russian },
+    learnWord,
   } = props;
 
   const [isClicked, setClicked] = useState(false);
 
   const onCheckButtonClick = () => {
     setClicked(true);
+    learnWord();
   };
 
   useEffect(() => {

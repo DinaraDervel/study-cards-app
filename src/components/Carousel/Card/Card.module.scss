@@ -2,8 +2,7 @@
 
 .card {
   height: $card-size;
-  width: 100%;
-  height: 100%;
+  width: $card-size;
   padding: 2rem;
   background-image: linear-gradient(65deg, $customGreen, $customMint);
   border-radius: 1rem;
