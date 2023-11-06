@@ -8,8 +8,8 @@ body {
   padding: 0;
   font-family: $mainFont;
   font-size: 14px;
-  background-color: #eeeeee;
-  color: #949494;
+  background-color: $customWhite;
+  color: $customGray;
 }
 * {
   box-sizing: border-box;

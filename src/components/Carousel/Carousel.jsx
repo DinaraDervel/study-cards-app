@@ -1,8 +1,8 @@
 import Card from "./Card/Card";
 import s from "./Carousel.module.scss";
-import { useRef, useState, useEffect } from "react";
+import React, { useState } from "react";
 
-export default function Carousel(props) {
+const Carousel = (props) => {
   const [idOfShownWord, setShownWord] = useState(props.isShown);
 
   const onLeftClick = () => {
@@ -12,16 +12,18 @@ export default function Carousel(props) {
     if (idOfShownWord > 0) setShownWord(idOfShownWord - 1);
   };
 
-  const countLearnedWords = useRef(0);
+  const [countLearnedWords, setCount] = useState(0);
   const learnWord = () => {
-    countLearnedWords.current = countLearnedWords.current + 1;
+    setCount(countLearnedWords + 1);
   };
 
   return (
     <div className={s.wrapper}>
-      <div>Количество выученных слов: {countLearnedWords.current}</div>
+      <div>Количество выученных слов: {countLearnedWords}</div>
       <div className={s.carousel}>
-        {idOfShownWord === 0 && <button className={s.nav}></button>}
+        {idOfShownWord === 0 && (
+          <button className={s.nav + " " + s.navHidden}></button>
+        )}
         {idOfShownWord > 0 && (
           <button className={s.nav} onClick={onRightClick}>
             <span>&#8592;</span>
@@ -33,7 +35,12 @@ export default function Carousel(props) {
             <span>&#8594;</span>
           </button>
         )}
+        {idOfShownWord === props.data.length - 1 && (
+          <button className={s.nav + " " + s.navHidden}></button>
+        )}
       </div>
     </div>
   );
-}
+};
+
+export default React.memo(Carousel);

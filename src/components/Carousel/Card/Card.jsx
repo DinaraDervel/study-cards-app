@@ -1,8 +1,9 @@
 import { useEffect, useState, useRef } from "react";
+import React from "react";
 import CheckButton from "../../Buttons/CheckButton/CheckButton";
 import s from "./Card.module.scss";
 
-export default function Card(props) {
+const Card = (props) => {
   const {
     item: { english, transcription, russian },
     learnWord,
@@ -17,7 +18,7 @@ export default function Card(props) {
 
   useEffect(() => {
     setClicked(false);
-  }, [props]);
+  }, [english]);
 
   return (
     <div className={s.card}>
@@ -30,4 +31,6 @@ export default function Card(props) {
       )}
     </div>
   );
-}
+};
+
+export default React.memo(Card);
