@@ -14,6 +14,7 @@ export default function SaveButton(props) {
       ) : (
         <button
           className={s.button}
+          disabled={props.error ? true : false}
           onClick={() => {
             props.onClick();
             onButtonClick();

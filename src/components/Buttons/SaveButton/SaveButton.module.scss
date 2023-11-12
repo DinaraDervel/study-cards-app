@@ -9,6 +9,12 @@
   &:hover {
     transform: scale(1.2, 1.2);
   }
+  &:disabled,
+  &[disabled] {
+    border: 1px solid #999999;
+    background-color: #cccccc;
+    color: #666666;
+  }
 
   &_saved {
     background-color: $customGreen;

@@ -21,9 +21,19 @@ export default function Row(props) {
     russian: russian,
   });
 
-  const onRowChange = (fieldName, newValue) => {
-    editedWord[fieldName] = newValue;
+  const [isError, setError] = useState(false);
+
+  const onRowChange = (e) => {
+    if (e.target.value === "") {
+      setError(true);
+      e.target.className = s.error;
+    } else {
+      setError(false);
+      e.target.className = "";
+    }
+    editedWord[e.target.name] = e.target.value;
     setEditedWord(editedWord);
+    console.log(editedWord);
     localStorage.setItem("editedWord", JSON.stringify(editedWord));
   };
 
@@ -34,29 +44,28 @@ export default function Row(props) {
           <th>
             <input
               defaultValue={english}
-              onChange={(event) => {
-                onRowChange("english", event.target.value);
-              }}
+              onChange={onRowChange}
+              name="english"
             ></input>
           </th>
           <th>
             <input
+              // className={isError && s.error}
               defaultValue={transcription}
-              onChange={(event) => {
-                onRowChange("transcription", event.target.value);
-              }}
+              onChange={onRowChange}
+              name="transcription"
             ></input>
           </th>
           <th>
             <input
+              // className={isError && s.error}
               defaultValue={russian}
-              onChange={(event) => {
-                onRowChange("russian", event.target.value);
-              }}
+              onChange={onRowChange}
+              name="russian"
             ></input>
           </th>
           <th>
-            <SaveButton onClick={onSaveClick} />
+            <SaveButton error={isError} onClick={onSaveClick} />
             <CancelButton onClick={onCancelClick} />
           </th>
         </tr>
