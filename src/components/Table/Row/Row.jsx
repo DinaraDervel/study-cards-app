@@ -50,7 +50,6 @@ export default function Row(props) {
           </th>
           <th>
             <input
-              // className={isError && s.error}
               defaultValue={transcription}
               onChange={onRowChange}
               name="transcription"
@@ -58,7 +57,6 @@ export default function Row(props) {
           </th>
           <th>
             <input
-              // className={isError && s.error}
               defaultValue={russian}
               onChange={onRowChange}
               name="russian"

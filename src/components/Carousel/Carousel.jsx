@@ -3,10 +3,11 @@ import s from "./Carousel.module.scss";
 import React, { useState } from "react";
 
 const Carousel = (props) => {
-  const [idOfShownWord, setShownWord] = useState(props.isShown);
+  const { data, isShown } = props;
 
+  const [idOfShownWord, setShownWord] = useState(isShown);
   const onLeftClick = () => {
-    if (idOfShownWord < props.data.length - 1) setShownWord(idOfShownWord + 1);
+    if (idOfShownWord < data.length - 1) setShownWord(idOfShownWord + 1);
   };
   const onRightClick = () => {
     if (idOfShownWord > 0) setShownWord(idOfShownWord - 1);
@@ -29,13 +30,13 @@ const Carousel = (props) => {
             <span>&#8592;</span>
           </button>
         )}
-        <Card item={props.data[idOfShownWord]} learnWord={learnWord} />
-        {idOfShownWord < props.data.length - 1 && (
+        <Card item={data[idOfShownWord]} learnWord={learnWord} />
+        {idOfShownWord < data.length - 1 && (
           <button className={s.nav} onClick={onLeftClick}>
             <span>&#8594;</span>
           </button>
         )}
-        {idOfShownWord === props.data.length - 1 && (
+        {idOfShownWord === data.length - 1 && (
           <button className={s.nav + " " + s.navHidden}></button>
         )}
       </div>

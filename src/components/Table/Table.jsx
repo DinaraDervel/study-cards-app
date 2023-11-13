@@ -17,6 +17,7 @@ export default function Table(props) {
     });
     setWords(newWords);
     localStorage.setItem("words", JSON.stringify(newWords));
+    setTimeout(() => setSelectedId(null), 2000);
   };
   const onCancelClick = () => {
     setSelectedId(null);
