@@ -8,9 +8,18 @@ export default function Table(props) {
 
   const onEditClick = (id) => {
     setSelectedId(id);
+    localStorage.setItem("editedWord", JSON.stringify({}));
   };
   const onSaveClick = () => {
-    const editedWord = JSON.parse(localStorage.getItem("editedWord"));
+    const editedWord = localStorage.getItem("editedWord")
+      ? JSON.parse(localStorage.getItem("editedWord"))
+      : {};
+    if (Object.values(editedWord).indexOf("") > -1) {
+      alert("Поле не может быть пустым!");
+      setSelectedId(null);
+      localStorage.setItem("editedWord", JSON.stringify({}));
+      return;
+    }
     const newWords = words.map((el) => {
       el = el.id === editedWord.id ? editedWord : el;
       return el;
@@ -19,6 +28,7 @@ export default function Table(props) {
     localStorage.setItem("words", JSON.stringify(newWords));
     setTimeout(() => setSelectedId(null), 2000);
   };
+
   const onCancelClick = () => {
     setSelectedId(null);
     localStorage.setItem("editedWord", JSON.stringify({}));

@@ -24,16 +24,15 @@ export default function Row(props) {
   const [isError, setError] = useState(false);
 
   const onRowChange = (e) => {
-    if (e.target.value === "") {
+    if (e.target.value.trim() === "") {
       setError(true);
       e.target.className = s.error;
     } else {
       setError(false);
       e.target.className = "";
     }
-    editedWord[e.target.name] = e.target.value;
+    editedWord[e.target.name] = e.target.value.trim();
     setEditedWord(editedWord);
-    console.log(editedWord);
     localStorage.setItem("editedWord", JSON.stringify(editedWord));
   };
 
