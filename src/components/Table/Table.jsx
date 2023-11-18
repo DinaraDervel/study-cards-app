@@ -1,9 +1,10 @@
+import { DataContext } from "../../data-context";
 import Row from "./Row/Row";
 import s from "./Table.module.scss";
-import { useState } from "react";
+import { useContext, useState } from "react";
 
-export default function Table(props) {
-  const [words, setWords] = useState(props.data);
+export default function Table() {
+  const { data, updateData } = useContext(DataContext);
   const [selectedId, setSelectedId] = useState(null);
 
   const onEditClick = (id) => {
@@ -20,11 +21,11 @@ export default function Table(props) {
       localStorage.setItem("editedWord", JSON.stringify({}));
       return;
     }
-    const newWords = words.map((el) => {
+    const newWords = data.map((el) => {
       el = el.id === editedWord.id ? editedWord : el;
       return el;
     });
-    setWords(newWords);
+    updateData(newWords);
     localStorage.setItem("words", JSON.stringify(newWords));
     setTimeout(() => setSelectedId(null), 2000);
   };
@@ -34,7 +35,7 @@ export default function Table(props) {
     localStorage.setItem("editedWord", JSON.stringify({}));
   };
 
-  let rowsWithWords = words.map((word) => (
+  let rowsWithWords = data.map((word) => (
     <Row
       data={word}
       key={word.id}

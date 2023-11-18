@@ -3,24 +3,27 @@ import Carousel from './components/Carousel/Carousel';
 import Header from './components/Header/Header';
 import Table from './components/Table/Table';
 import NoMatch from './components/NoMatch/NoMatch';
-import data from "./data/data.json";
+import { DataContextProvider } from './data-context';
 import './App.css'
 
+
+
 function App() {
-  const storedData = JSON.parse(localStorage.getItem("words"));
-  data = storedData ? storedData : data;
+
   return (
     <>
       <BrowserRouter>
         <Header />
-        <div className='app-wrapper-content'>
-          <Routes>
-            <Route exact path='/' element={<Table data={data} />} />
-            <Route path='table' element={<Table data={data} />} />
-            <Route path='carousel' element={<Carousel data={data} isShown={0} />} />
-            <Route path="*" element={<NoMatch />} />
-          </Routes>
-        </div>
+        <DataContextProvider >
+          <div className='app-wrapper-content'>
+            <Routes>
+              <Route exact path='/' element={<Table />} />
+              <Route path='table' element={<Table />} />
+              <Route path='carousel' element={<Carousel />} />
+              <Route path="*" element={<NoMatch />} />
+            </Routes>
+          </div>
+        </DataContextProvider>
         {/* <Footer /> */}
       </BrowserRouter>
     </>

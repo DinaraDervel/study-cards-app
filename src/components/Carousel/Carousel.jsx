@@ -1,11 +1,13 @@
+import { DataContext } from "../../data-context";
+import { useContext } from "react";
 import Card from "./Card/Card";
 import s from "./Carousel.module.scss";
 import React, { useState } from "react";
 
-const Carousel = (props) => {
-  const { data, isShown } = props;
+const Carousel = () => {
+  const { data } = useContext(DataContext);
 
-  const [idOfShownWord, setShownWord] = useState(isShown);
+  const [idOfShownWord, setShownWord] = useState(0);
   const onLeftClick = () => {
     if (idOfShownWord < data.length - 1) setShownWord(idOfShownWord + 1);
   };
