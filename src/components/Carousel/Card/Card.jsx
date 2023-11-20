@@ -33,4 +33,12 @@ const Card = (props) => {
   );
 };
 
+Card.defaultProps = {
+  item: {
+    english: "new word",
+    transcription: "[n(y)o͞o wərd]",
+    russian: "новое слово",
+  },
+};
+
 export default React.memo(Card);

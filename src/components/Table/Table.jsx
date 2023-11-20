@@ -1,11 +1,21 @@
 import { DataContext } from "../../data-context";
+import NoMatch from "../NoMatch/NoMatch";
 import Row from "./Row/Row";
 import s from "./Table.module.scss";
 import { useContext, useState } from "react";
 
 export default function Table() {
-  const { data, updateData } = useContext(DataContext);
+  const { data, isLoading, error, updateData } = useContext(DataContext);
   const [selectedId, setSelectedId] = useState(null);
+
+  if (error) {
+    if (error.message === "404") return <NoMatch />;
+    else return <p>{error.message}</p>;
+  }
+
+  if (isLoading) {
+    return <p>Loading ...</p>;
+  }
 
   const onEditClick = (id) => {
     setSelectedId(id);
@@ -25,8 +35,8 @@ export default function Table() {
       el = el.id === editedWord.id ? editedWord : el;
       return el;
     });
-    updateData(newWords);
-    localStorage.setItem("words", JSON.stringify(newWords));
+    updateData(newWords, editedWord);
+    //localStorage.setItem("words", JSON.stringify(newWords));
     setTimeout(() => setSelectedId(null), 2000);
   };
 

@@ -7,7 +7,7 @@ import { useState } from "react";
 
 export default function Row(props) {
   const {
-    data: { id, english, transcription, russian },
+    data: { id, english, transcription, russian, tags, tags_json },
     onEditClick,
     selectedId,
     onSaveClick,
@@ -19,6 +19,8 @@ export default function Row(props) {
     english: english,
     transcription: transcription,
     russian: russian,
+    tags: tags,
+    tags_json: tags_json,
   });
 
   const [isError, setError] = useState(false);

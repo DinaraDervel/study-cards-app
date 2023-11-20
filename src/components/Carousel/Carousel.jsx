@@ -1,13 +1,24 @@
 import { DataContext } from "../../data-context";
 import { useContext } from "react";
 import Card from "./Card/Card";
+import NoMatch from "../NoMatch/NoMatch";
 import s from "./Carousel.module.scss";
 import React, { useState } from "react";
 
 const Carousel = () => {
-  const { data } = useContext(DataContext);
-
+  const { data, isLoading, error } = useContext(DataContext);
   const [idOfShownWord, setShownWord] = useState(0);
+  const [countLearnedWords, setCount] = useState(0);
+
+  if (error) {
+    if (error.message === "404") return <NoMatch />;
+    else return <p>{error.message}</p>;
+  }
+
+  if (isLoading) {
+    return <p>Loading ...</p>;
+  }
+
   const onLeftClick = () => {
     if (idOfShownWord < data.length - 1) setShownWord(idOfShownWord + 1);
   };
@@ -15,7 +26,6 @@ const Carousel = () => {
     if (idOfShownWord > 0) setShownWord(idOfShownWord - 1);
   };
 
-  const [countLearnedWords, setCount] = useState(0);
   const learnWord = () => {
     setCount(countLearnedWords + 1);
   };
