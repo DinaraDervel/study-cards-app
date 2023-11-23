@@ -36,7 +36,6 @@ export default function Table() {
       return el;
     });
     updateData(newWords, editedWord);
-    //localStorage.setItem("words", JSON.stringify(newWords));
     setTimeout(() => setSelectedId(null), 2000);
   };
 
