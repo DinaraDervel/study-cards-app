@@ -26,7 +26,22 @@ export default function Row(props) {
   const [isError, setError] = useState(false);
 
   const onRowChange = (e) => {
+    const regexLatin = /^[a-zA-z\s]+$/gm;
+    const regexCyrillic = /^[а-яёА-ЯЁ\s]+$/gm;
+    //checking for empty inputs and latin/cyrillic letters
     if (e.target.value.trim() === "") {
+      setError(true);
+      e.target.className = s.error;
+    } else if (
+      e.target.name === "english" &&
+      !regexLatin.test(e.target.value)
+    ) {
+      setError(true);
+      e.target.className = s.error;
+    } else if (
+      e.target.name === "russian" &&
+      !regexCyrillic.test(e.target.value)
+    ) {
       setError(true);
       e.target.className = s.error;
     } else {
