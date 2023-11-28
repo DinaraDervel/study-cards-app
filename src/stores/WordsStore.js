@@ -63,7 +63,9 @@ class WordStore {
                 else throw new Error(response.status);
             })
             .then(response => {
-                this.words.push(response);
+                if (response.status !== 'Error')
+                    this.words.push(response);
+                else alert(JSON.stringify(response.errors));
             })
             .catch(err => {
                 this.error = err;
@@ -71,22 +73,23 @@ class WordStore {
     }
 
     deleteWord(id) {
-        fetch('/api/words/' + id + '/delete', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-        })
-            .then((response) => {
-                if (response.ok) return response.json();
-                else throw new Error(response.status);
+        if (id)
+            fetch('/api/words/' + id + '/delete', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
             })
-            .then(() => {
-                this.words.splice(this.words.indexOf(this.words.find((el) => el.id === id)), 1);
-            })
-            .catch(err => {
-                this.error = err;
-            })
+                .then((response) => {
+                    if (response.ok) return response.json();
+                    else throw new Error(response.status);
+                })
+                .then(() => {
+                    this.words.splice(this.words.indexOf(this.words.find((el) => el.id === id)), 1);
+                })
+                .catch(err => {
+                    this.error = err;
+                })
     }
 
 }

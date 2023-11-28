@@ -8,6 +8,12 @@ import AddButton from "../Buttons/AddButton/AddButton";
 const Table = inject(["wordsStore"])(
   observer(({ wordsStore }) => {
     const [selectedId, setSelectedId] = useState(null);
+    const [isAddButtonClicked, setAddButtonClicked] = useState(false);
+    const [newWord, setNewWord] = useState({
+      english: "",
+      transcription: "",
+      russian: "",
+    });
 
     useEffect(() => {
       wordsStore.load();
@@ -32,9 +38,9 @@ const Table = inject(["wordsStore"])(
         ? JSON.parse(localStorage.getItem("editedWord"))
         : {};
       if (
-        editedWord.english === "" ||
-        editedWord.transcription === "" ||
-        editedWord.russian === ""
+        !editedWord.english ||
+        !editedWord.transcription ||
+        !editedWord.russian
       ) {
         alert("Поле не может быть пустым!");
         setSelectedId(null);
@@ -45,17 +51,32 @@ const Table = inject(["wordsStore"])(
         el = el.id === editedWord.id ? editedWord : el;
         return el;
       });
-      wordsStore.update(newWords, editedWord);
+      if (isAddButtonClicked) {
+        setNewWord(editedWord);
+        wordsStore.addWord(editedWord);
+        setAddButtonClicked(false);
+        localStorage.setItem("editedWord", JSON.stringify({}));
+      } else wordsStore.update(newWords, editedWord);
       setTimeout(() => setSelectedId(null), 2000);
     };
 
     const onCancelClick = () => {
       setSelectedId(null);
+      setNewWord({});
+      setAddButtonClicked(false);
       localStorage.setItem("editedWord", JSON.stringify({}));
     };
 
     const onDeleteClick = (id) => {
+      setSelectedId(null);
+      setNewWord({});
+      setAddButtonClicked(false);
       wordsStore.deleteWord(id);
+    };
+
+    const onAddClick = () => {
+      setAddButtonClicked(true);
+      setNewWord({});
     };
 
     let rowsWithWords = wordsStore.words.map((word) => (
@@ -79,11 +100,24 @@ const Table = inject(["wordsStore"])(
               <th>ТРАНСКРИПЦИЯ</th>
               <th>ПЕРЕВОД</th>
               <th>
-                <AddButton />
+                <AddButton onClick={onAddClick} />
               </th>
             </tr>
           </thead>
-          <tbody>{rowsWithWords}</tbody>
+          <tbody>
+            {isAddButtonClicked && (
+              <Row
+                data={newWord}
+                key={newWord.id}
+                onEditClick={onEditClick}
+                selectedId={selectedId}
+                onSaveClick={onSaveClick}
+                onCancelClick={onCancelClick}
+                onDeleteClick={onDeleteClick}
+              />
+            )}
+            {rowsWithWords}
+          </tbody>
         </table>
       </div>
     );
