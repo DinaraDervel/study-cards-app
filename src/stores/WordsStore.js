@@ -70,8 +70,8 @@ class WordStore {
             })
     }
 
-    deleteWord(deletedWord) {
-        fetch('/api/words/' + deletedWord.id + '/delete', {
+    deleteWord(id) {
+        fetch('/api/words/' + id + '/delete', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -81,8 +81,8 @@ class WordStore {
                 if (response.ok) return response.json();
                 else throw new Error(response.status);
             })
-            .then(response => {
-                this.words.splice(this.words.indexOf(response), 1);
+            .then(() => {
+                this.words.splice(this.words.indexOf(this.words.find((el) => el.id === id)), 1);
             })
             .catch(err => {
                 this.error = err;

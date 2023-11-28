@@ -12,6 +12,7 @@ export default function Row(props) {
     selectedId,
     onSaveClick,
     onCancelClick,
+    onDeleteClick,
   } = props;
 
   const [editedWord, setEditedWord] = useState({
@@ -90,7 +91,7 @@ export default function Row(props) {
           <th>{russian}</th>
           <th>
             <EditButton id={id} onClick={onEditClick} />
-            <DeleteButton />
+            <DeleteButton id={id} onClick={onDeleteClick} />
           </th>
         </tr>
       )}

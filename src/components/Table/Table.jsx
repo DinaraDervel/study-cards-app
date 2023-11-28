@@ -25,6 +25,7 @@ const Table = inject(["wordsStore"])(
       setSelectedId(id);
       localStorage.setItem("editedWord", JSON.stringify({}));
     };
+
     const onSaveClick = () => {
       const editedWord = localStorage.getItem("editedWord")
         ? JSON.parse(localStorage.getItem("editedWord"))
@@ -52,6 +53,10 @@ const Table = inject(["wordsStore"])(
       localStorage.setItem("editedWord", JSON.stringify({}));
     };
 
+    const onDeleteClick = (id) => {
+      wordsStore.deleteWord(id);
+    };
+
     let rowsWithWords = wordsStore.words.map((word) => (
       <Row
         data={word}
@@ -60,6 +65,7 @@ const Table = inject(["wordsStore"])(
         selectedId={selectedId}
         onSaveClick={onSaveClick}
         onCancelClick={onCancelClick}
+        onDeleteClick={onDeleteClick}
       />
     ));
 

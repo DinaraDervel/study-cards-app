@@ -1,8 +1,13 @@
 import s from "./DeleteButton.module.scss";
 
-export default function DeleteButton() {
+export default function DeleteButton(props) {
   return (
-    <button className={s.button}>
+    <button
+      className={s.button}
+      onClick={() => {
+        props.onClick(props.id);
+      }}
+    >
       <svg
         xmlns="http://www.w3.org/2000/svg"
         id="Isolation_Mode"
