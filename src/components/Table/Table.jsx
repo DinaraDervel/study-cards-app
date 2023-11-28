@@ -3,6 +3,7 @@ import { observer, inject } from "mobx-react";
 import NoMatch from "../NoMatch/NoMatch";
 import Row from "./Row/Row";
 import s from "./Table.module.scss";
+import AddButton from "../Buttons/AddButton/AddButton";
 
 const Table = inject(["wordsStore"])(
   observer(({ wordsStore }) => {
@@ -17,9 +18,9 @@ const Table = inject(["wordsStore"])(
       else return <p>{wordsStore.error.message}</p>;
     }
 
-    if (wordsStore.isLoading) {
-      return <p>Loading ...</p>;
-    }
+    // if (wordsStore.isLoading) {
+    //   return <p>Loading ...</p>;
+    // }
 
     const onEditClick = (id) => {
       setSelectedId(id);
@@ -77,7 +78,9 @@ const Table = inject(["wordsStore"])(
               <th>СЛОВО</th>
               <th>ТРАНСКРИПЦИЯ</th>
               <th>ПЕРЕВОД</th>
-              <th></th>
+              <th>
+                <AddButton />
+              </th>
             </tr>
           </thead>
           <tbody>{rowsWithWords}</tbody>

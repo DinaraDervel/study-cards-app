@@ -10,14 +10,14 @@ class WordStore {
             words: observable,
             load: action,
             update: action,
-            add: action,
+            addWord: action,
             deleteWord: action,
         });
     }
 
     load() {
-        // this.isLoading = true;
-        fetch('/api/words')
+        this.isLoading = true;
+        fetch('/api/words ')
             .then((response) => {
                 if (response.ok) return response.json();
                 else throw new Error(response.status);
@@ -50,7 +50,7 @@ class WordStore {
             })
     }
 
-    add(newWord) {
+    addWord(newWord) {
         fetch('/api/words/add', {
             method: 'POST',
             headers: {

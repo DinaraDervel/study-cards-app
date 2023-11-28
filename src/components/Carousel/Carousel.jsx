@@ -18,9 +18,9 @@ const Carousel = inject(["wordsStore"])(
       else return <p>{wordsStore.error.message}</p>;
     }
 
-    if (wordsStore.isLoading) {
-      return <p>Loading ...</p>;
-    }
+    // if (wordsStore.isLoading) {
+    //   return <p>Loading ...</p>;
+    // }
 
     const onLeftClick = () => {
       if (idOfShownWord < wordsStore.words.length - 1)
