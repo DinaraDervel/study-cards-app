@@ -3,7 +3,7 @@ import s from "./AddButton.module.scss";
 export default function AddButton(props) {
   return (
     <>
-      <div class={s.tooltip}>
+      <div className={s.tooltip}>
         <button
           className={s.button}
           onClick={() => {
@@ -28,7 +28,7 @@ export default function AddButton(props) {
           </svg>
         </button>
 
-        <span class={s.tooltiptext}>Добавить слово</span>
+        <span className={s.tooltiptext}>Добавить слово</span>
       </div>
     </>
   );
