@@ -8,6 +8,7 @@ class WordStore {
     constructor() {
         makeObservable(this, {
             words: observable,
+            isLoading: observable,
             load: action,
             update: action,
             addWord: action,
@@ -24,12 +25,11 @@ class WordStore {
             })
             .then((response) => {
                 this.words = response;
-                this.isLoading = false;
             })
             .catch(err => {
                 this.error = err;
-                this.isLoading = false;
             })
+            .finally(() => this.isLoading = false)
     }
 
     update(newWords, editedWord) {

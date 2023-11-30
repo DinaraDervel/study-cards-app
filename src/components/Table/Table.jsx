@@ -24,9 +24,9 @@ const Table = inject(["wordsStore"])(
       else return <p>{wordsStore.error.message}</p>;
     }
 
-    // if (wordsStore.isLoading) {
-    //   return <p>Loading ...</p>;
-    // }
+    if (wordsStore.isLoading) {
+      return <p>Loading ...</p>;
+    }
 
     const onEditClick = (id) => {
       setSelectedId(id);
