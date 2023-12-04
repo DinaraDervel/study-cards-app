@@ -1,4 +1,5 @@
 import { makeObservable, observable, action } from "mobx";
+import { getAllWords, updateWord, addNewWord, deleteWord } from "../api/requests";
 
 class WordStore {
     words = [];
@@ -11,18 +12,14 @@ class WordStore {
             isLoading: observable,
             load: action,
             update: action,
-            addWord: action,
-            deleteWord: action,
+            add: action,
+            delete: action,
         });
     }
 
     load() {
         this.isLoading = true;
-        fetch('/api/words ')
-            .then((response) => {
-                if (response.ok) return response.json();
-                else throw new Error(response.status);
-            })
+        getAllWords()
             .then((response) => {
                 this.words = response;
             })
@@ -34,37 +31,17 @@ class WordStore {
 
     update(newWords, editedWord) {
         this.words = newWords;
-        fetch('/api/words/' + editedWord.id + '/update', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(editedWord)
-        })
-            .then((response) => {
-                if (response.ok) return response.json();
-                else throw new Error(response.status);
-            })
+        updateWord(editedWord)
             .catch(err => {
                 this.error = err;
             })
     }
 
-    addWord(newWord) {
-        fetch('/api/words/add', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(newWord)
-        })
-            .then((response) => {
-                if (response.ok) return response.json();
-                else throw new Error(response.status);
-            })
+    add(newWord) {
+        addNewWord(newWord)
             .then(response => {
                 if (response.status !== 'Error')
-                    this.words.push(response);
+                    this.words.unshift(response);
                 else alert(JSON.stringify(response.errors));
             })
             .catch(err => {
@@ -72,18 +49,9 @@ class WordStore {
             })
     }
 
-    deleteWord(id) {
+    delete(id) {
         if (id)
-            fetch('/api/words/' + id + '/delete', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-            })
-                .then((response) => {
-                    if (response.ok) return response.json();
-                    else throw new Error(response.status);
-                })
+            deleteWord(id)
                 .then(() => {
                     this.words.splice(this.words.indexOf(this.words.find((el) => el.id === id)), 1);
                 })

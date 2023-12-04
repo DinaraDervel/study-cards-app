@@ -53,7 +53,7 @@ const Table = inject(["wordsStore"])(
       });
       if (isAddButtonClicked) {
         setNewWord(editedWord);
-        wordsStore.addWord(editedWord);
+        wordsStore.add(editedWord);
         setAddButtonClicked(false);
         localStorage.setItem("editedWord", JSON.stringify({}));
       } else wordsStore.update(newWords, editedWord);
@@ -71,7 +71,7 @@ const Table = inject(["wordsStore"])(
       setSelectedId(null);
       setNewWord({});
       setAddButtonClicked(false);
-      wordsStore.deleteWord(id);
+      wordsStore.delete(id);
     };
 
     const onAddClick = () => {
