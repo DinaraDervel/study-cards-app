@@ -1,7 +1,6 @@
-import EditButton from "../../Buttons/EditButton/EditButton";
-import DeleteButton from "../../Buttons/DeleteButton/DeleteButton";
 import SaveButton from "../../Buttons/SaveButton/SaveButton";
 import CancelButton from "../../Buttons/CancelButton/CancelButton";
+import Button from "../../Buttons/Button";
 import s from "../Table.module.scss";
 import { useState } from "react";
 
@@ -90,8 +89,20 @@ export default function Row(props) {
           <th>{transcription}</th>
           <th>{russian}</th>
           <th>
-            <EditButton id={id} onClick={onEditClick} />
-            <DeleteButton id={id} onClick={onDeleteClick} />
+            <Button
+              id={id}
+              isError={false}
+              image="edit"
+              tooltip="Edit"
+              onClick={onEditClick}
+            />
+            <Button
+              id={id}
+              isError={false}
+              image="delete"
+              tooltip="Delete"
+              onClick={onDeleteClick}
+            />
           </th>
         </tr>
       )}

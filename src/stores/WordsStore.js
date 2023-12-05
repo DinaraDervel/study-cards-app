@@ -59,8 +59,6 @@ class WordStore {
                     this.error = err;
                 })
     }
-
 }
-
 
 export default WordStore;
