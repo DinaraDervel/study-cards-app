@@ -1,5 +1,4 @@
 import SaveButton from "../../Buttons/SaveButton/SaveButton";
-import CancelButton from "../../Buttons/CancelButton/CancelButton";
 import Button from "../../Buttons/Button";
 import s from "../Table.module.scss";
 import { useState } from "react";
@@ -80,7 +79,13 @@ export default function Row(props) {
           </th>
           <th>
             <SaveButton error={isError} onClick={onSaveClick} />
-            <CancelButton onClick={onCancelClick} />
+            <Button
+              id={null}
+              isError={false}
+              image="cancel"
+              tooltip="Cancel"
+              onClick={onCancelClick}
+            />
           </th>
         </tr>
       ) : (

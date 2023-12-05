@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
 import { observer, inject } from "mobx-react";
 import NoMatch from "../NoMatch/NoMatch";
+import Button from "../Buttons/Button";
 import Row from "./Row/Row";
 import s from "./Table.module.scss";
-import AddButton from "../Buttons/AddButton/AddButton";
 
 const Table = inject(["wordsStore"])(
   observer(({ wordsStore }) => {
@@ -60,8 +60,8 @@ const Table = inject(["wordsStore"])(
       setTimeout(() => setSelectedId(null), 2000);
     };
 
-    const onCancelClick = () => {
-      setSelectedId(null);
+    const onCancelClick = (id = null) => {
+      setSelectedId(id);
       setNewWord({});
       setAddButtonClicked(false);
       localStorage.setItem("editedWord", JSON.stringify({}));
@@ -74,7 +74,7 @@ const Table = inject(["wordsStore"])(
       wordsStore.delete(id);
     };
 
-    const onAddClick = () => {
+    const onAddClick = (id = null) => {
       setAddButtonClicked(true);
       setNewWord({});
     };
@@ -100,7 +100,13 @@ const Table = inject(["wordsStore"])(
               <th>ТРАНСКРИПЦИЯ</th>
               <th>ПЕРЕВОД</th>
               <th>
-                <AddButton onClick={onAddClick} />
+                <Button
+                  id={null}
+                  isError={false}
+                  image="add"
+                  tooltip="Add"
+                  onClick={onAddClick}
+                />
               </th>
             </tr>
           </thead>
