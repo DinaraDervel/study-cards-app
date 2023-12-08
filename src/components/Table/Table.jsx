@@ -1,63 +1,132 @@
+import { useState, useEffect } from "react";
+import { observer, inject } from "mobx-react";
+import NoMatch from "../NoMatch/NoMatch";
+import Button from "../Buttons/Button";
 import Row from "./Row/Row";
 import s from "./Table.module.scss";
-import { useState } from "react";
 
-export default function Table(props) {
-  const [words, setWords] = useState(props.data);
-  const [selectedId, setSelectedId] = useState(null);
-
-  const onEditClick = (id) => {
-    setSelectedId(id);
-    localStorage.setItem("editedWord", JSON.stringify({}));
-  };
-  const onSaveClick = () => {
-    const editedWord = localStorage.getItem("editedWord")
-      ? JSON.parse(localStorage.getItem("editedWord"))
-      : {};
-    if (Object.values(editedWord).indexOf("") > -1) {
-      alert("Поле не может быть пустым!");
-      setSelectedId(null);
-      localStorage.setItem("editedWord", JSON.stringify({}));
-      return;
-    }
-    const newWords = words.map((el) => {
-      el = el.id === editedWord.id ? editedWord : el;
-      return el;
+const Table = inject(["wordsStore"])(
+  observer(({ wordsStore }) => {
+    const [selectedId, setSelectedId] = useState(null);
+    const [isAddButtonClicked, setAddButtonClicked] = useState(false);
+    const [newWord, setNewWord] = useState({
+      english: "",
+      transcription: "",
+      russian: "",
     });
-    setWords(newWords);
-    localStorage.setItem("words", JSON.stringify(newWords));
-    setTimeout(() => setSelectedId(null), 2000);
-  };
 
-  const onCancelClick = () => {
-    setSelectedId(null);
-    localStorage.setItem("editedWord", JSON.stringify({}));
-  };
+    useEffect(() => {
+      wordsStore.load();
+    }, []);
 
-  let rowsWithWords = words.map((word) => (
-    <Row
-      data={word}
-      key={word.id}
-      onEditClick={onEditClick}
-      selectedId={selectedId}
-      onSaveClick={onSaveClick}
-      onCancelClick={onCancelClick}
-    />
-  ));
+    if (wordsStore.error) {
+      if (wordsStore.error.message === "404") return <NoMatch />;
+      else return <p>{wordsStore.error.message}</p>;
+    }
 
-  return (
-    <div className={s.wrapper}>
-      <table className={s.table}>
-        <thead>
-          <tr>
-            <th>СЛОВО</th>
-            <th>ТРАНСКРИПЦИЯ</th>
-            <th>ПЕРЕВОД</th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody>{rowsWithWords}</tbody>
-      </table>
-    </div>
-  );
-}
+    if (wordsStore.isLoading) {
+      return <p>Loading ...</p>;
+    }
+
+    const onEditClick = (id) => {
+      setSelectedId(id);
+      localStorage.setItem("editedWord", JSON.stringify({}));
+    };
+
+    const onSaveClick = () => {
+      const editedWord = localStorage.getItem("editedWord")
+        ? JSON.parse(localStorage.getItem("editedWord"))
+        : {};
+      if (
+        !editedWord.english ||
+        !editedWord.transcription ||
+        !editedWord.russian
+      ) {
+        alert("Поле не может быть пустым!");
+        setSelectedId(null);
+        localStorage.setItem("editedWord", JSON.stringify({}));
+        return;
+      }
+      const newWords = wordsStore.words.map((el) => {
+        el = el.id === editedWord.id ? editedWord : el;
+        return el;
+      });
+      if (isAddButtonClicked) {
+        setNewWord(editedWord);
+        wordsStore.add(editedWord);
+        setAddButtonClicked(false);
+        localStorage.setItem("editedWord", JSON.stringify({}));
+      } else wordsStore.update(newWords, editedWord);
+      setTimeout(() => setSelectedId(null), 2000);
+    };
+
+    const onCancelClick = (id = null) => {
+      setSelectedId(id);
+      setNewWord({});
+      setAddButtonClicked(false);
+      localStorage.setItem("editedWord", JSON.stringify({}));
+    };
+
+    const onDeleteClick = (id) => {
+      setSelectedId(null);
+      setNewWord({});
+      setAddButtonClicked(false);
+      wordsStore.delete(id);
+    };
+
+    const onAddClick = (id = null) => {
+      setAddButtonClicked(true);
+      setNewWord({});
+    };
+
+    let rowsWithWords = wordsStore.words.map((word) => (
+      <Row
+        data={word}
+        key={word.id}
+        onEditClick={onEditClick}
+        selectedId={selectedId}
+        onSaveClick={onSaveClick}
+        onCancelClick={onCancelClick}
+        onDeleteClick={onDeleteClick}
+      />
+    ));
+
+    return (
+      <div className={s.wrapper}>
+        <table className={s.table}>
+          <thead>
+            <tr>
+              <th>СЛОВО</th>
+              <th>ТРАНСКРИПЦИЯ</th>
+              <th>ПЕРЕВОД</th>
+              <th>
+                <Button
+                  id={null}
+                  isError={false}
+                  image="add"
+                  tooltip="Add"
+                  onClick={onAddClick}
+                />
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            {isAddButtonClicked && (
+              <Row
+                data={newWord}
+                key={newWord.id}
+                onEditClick={onEditClick}
+                selectedId={selectedId}
+                onSaveClick={onSaveClick}
+                onCancelClick={onCancelClick}
+                onDeleteClick={onDeleteClick}
+              />
+            )}
+            {rowsWithWords}
+          </tbody>
+        </table>
+      </div>
+    );
+  })
+);
+export default Table;
