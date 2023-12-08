@@ -1,17 +1,16 @@
-import EditButton from "../../Buttons/EditButton/EditButton";
-import DeleteButton from "../../Buttons/DeleteButton/DeleteButton";
 import SaveButton from "../../Buttons/SaveButton/SaveButton";
-import CancelButton from "../../Buttons/CancelButton/CancelButton";
+import Button from "../../Buttons/Button";
 import s from "../Table.module.scss";
 import { useState } from "react";
 
 export default function Row(props) {
   const {
-    data: { id, english, transcription, russian },
+    data: { id, english, transcription, russian, tags, tags_json },
     onEditClick,
     selectedId,
     onSaveClick,
     onCancelClick,
+    onDeleteClick,
   } = props;
 
   const [editedWord, setEditedWord] = useState({
@@ -19,12 +18,29 @@ export default function Row(props) {
     english: english,
     transcription: transcription,
     russian: russian,
+    tags: tags,
+    tags_json: tags_json,
   });
 
   const [isError, setError] = useState(false);
 
   const onRowChange = (e) => {
+    const regexLatin = /^[a-zA-z\s]+$/gm;
+    const regexCyrillic = /^[а-яёА-ЯЁ\s]+$/gm;
+    //checking for empty inputs and latin/cyrillic letters
     if (e.target.value.trim() === "") {
+      setError(true);
+      e.target.className = s.error;
+    } else if (
+      e.target.name === "english" &&
+      !regexLatin.test(e.target.value)
+    ) {
+      setError(true);
+      e.target.className = s.error;
+    } else if (
+      e.target.name === "russian" &&
+      !regexCyrillic.test(e.target.value)
+    ) {
       setError(true);
       e.target.className = s.error;
     } else {
@@ -63,7 +79,13 @@ export default function Row(props) {
           </th>
           <th>
             <SaveButton error={isError} onClick={onSaveClick} />
-            <CancelButton onClick={onCancelClick} />
+            <Button
+              id={null}
+              isError={false}
+              image="cancel"
+              tooltip="Cancel"
+              onClick={onCancelClick}
+            />
           </th>
         </tr>
       ) : (
@@ -72,8 +94,20 @@ export default function Row(props) {
           <th>{transcription}</th>
           <th>{russian}</th>
           <th>
-            <EditButton id={id} onClick={onEditClick} />
-            <DeleteButton />
+            <Button
+              id={id}
+              isError={false}
+              image="edit"
+              tooltip="Edit"
+              onClick={onEditClick}
+            />
+            <Button
+              id={id}
+              isError={false}
+              image="delete"
+              tooltip="Delete"
+              onClick={onDeleteClick}
+            />
           </th>
         </tr>
       )}
