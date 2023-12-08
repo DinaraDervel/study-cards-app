@@ -1,7 +1,8 @@
 import s from "./Button.module.scss";
+import link from "../../images//sprite/sprite.svg";
 
 export default function Button({ id, isError, image, tooltip, onClick }) {
-  const link = "/sprite/sprite.svg#" + image;
+  const link1 = link + `#${image}`;
   return (
     <div className={s.tooltip}>
       <button
@@ -12,7 +13,7 @@ export default function Button({ id, isError, image, tooltip, onClick }) {
         }}
       >
         <svg className={s.icon}>
-          <use xlinkHref={link}></use>
+          <use xlinkHref={link1}></use>
         </svg>
       </button>
       <span className={s.tooltiptext}>{tooltip}</span>

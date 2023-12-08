@@ -10,7 +10,7 @@ export default function Header() {
             <li>
               <NavLink to="/">
                 <div>
-                  <img src="./logo.png" alt="logo" />
+                  <img src={require("../../images/logo.png")} alt="logo" />
                 </div>
               </NavLink>
             </li>
