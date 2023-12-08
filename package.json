@@ -63,7 +63,7 @@
     "webpack-manifest-plugin": "^4.0.2",
     "workbox-webpack-plugin": "^6.4.1"
   },
-  "proxy": "http://itgirlschool.justmakeit.ru",
+
   "scripts": {
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",

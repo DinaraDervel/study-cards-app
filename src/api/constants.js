@@ -1,6 +1,6 @@
 export const URLS = {
-    GET_ALL_WORDS: 'study-cards-app/api/words',
-    UPDATE_WORD: 'study-cards-app/api/words/:id/update',
-    ADD_WORD: 'study-cards-app/api/words/add',
-    DELETE_WORD: 'study-cards-app/api/words/:id/delete'
+    GET_ALL_WORDS: 'http://itgirlschool.justmakeit.ru/api/words',
+    UPDATE_WORD: 'http://itgirlschool.justmakeit.ru/api/words/:id/update',
+    ADD_WORD: 'http://itgirlschool.justmakeit.ru/api/words/add',
+    DELETE_WORD: 'http://itgirlschool.justmakeit.ru/api/words/:id/delete'
 }
