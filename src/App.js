@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { HashRouter, Routes, Route } from 'react-router-dom';
 import Carousel from './components/Carousel/Carousel';
 import Header from './components/Header/Header';
 import Table from './components/Table/Table';
@@ -15,7 +15,7 @@ const stores = {
 function App() {
   return (
     <>
-      <BrowserRouter basename={process.env.PUBLIC_URL}>
+      <HashRouter>
         <Header />
         <Provider {...stores}>
           <div className='app-wrapper-content'>
@@ -28,7 +28,7 @@ function App() {
           </div>
         </Provider>
         {/* <Footer /> */}
-      </BrowserRouter>
+      </HashRouter>
     </>
   );
 }
