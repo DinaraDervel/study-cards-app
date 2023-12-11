@@ -1,18 +1,18 @@
 {
   "files": {
     "main.css": "/study-cards-app/static/css/main.c53bb5b7.css",
-    "main.js": "/study-cards-app/static/js/main.07a0a021.js",
+    "main.js": "/study-cards-app/static/js/main.390b4b3d.js",
     "static/js/787.36c89c23.chunk.js": "/study-cards-app/static/js/787.36c89c23.chunk.js",
     "static/media/logo.png": "/study-cards-app/static/media/logo.6be071024d54045c90b3.png",
     "static/media/404_PageNotFound.png": "/study-cards-app/static/media/404_PageNotFound.85eb18a3517bba54d618.png",
     "static/media/sprite.svg": "/study-cards-app/static/media/sprite.cc5d73b383fb24bff89d618693e1812f.svg",
     "index.html": "/study-cards-app/index.html",
     "main.c53bb5b7.css.map": "/study-cards-app/static/css/main.c53bb5b7.css.map",
-    "main.07a0a021.js.map": "/study-cards-app/static/js/main.07a0a021.js.map",
+    "main.390b4b3d.js.map": "/study-cards-app/static/js/main.390b4b3d.js.map",
     "787.36c89c23.chunk.js.map": "/study-cards-app/static/js/787.36c89c23.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.c53bb5b7.css",
-    "static/js/main.07a0a021.js"
+    "static/js/main.390b4b3d.js"
   ]
 }
