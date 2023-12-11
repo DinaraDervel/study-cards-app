@@ -24,6 +24,7 @@ export const updateWord = (editedWord) => {
 
 export const addNewWord = (newWord) => {
     return fetch(URLS.ADD_WORD, {
+        mode: 'no-cors',
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'

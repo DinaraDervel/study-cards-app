@@ -10,14 +10,23 @@ const Table = inject(["wordsStore"])(
     const [selectedId, setSelectedId] = useState(null);
     const [isAddButtonClicked, setAddButtonClicked] = useState(false);
     const [newWord, setNewWord] = useState({
+      id: "",
       english: "",
       transcription: "",
       russian: "",
+      tags: "",
+      tags_json: "",
     });
 
     useEffect(() => {
-      wordsStore.load();
+      if (!wordsStore.isLoading) wordsStore.load();
+      // eslint-disable-next-line
     }, []);
+
+    useEffect(() => {
+      wordsStore.load();
+      // eslint-disable-next-line
+    }, [wordsStore.error]);
 
     if (wordsStore.error) {
       if (wordsStore.error.message === "404") return <NoMatch />;
@@ -76,7 +85,7 @@ const Table = inject(["wordsStore"])(
 
     const onAddClick = (id = null) => {
       setAddButtonClicked(true);
-      setNewWord({});
+      setNewWord({ id: "", tags: "", tags_json: "" });
     };
 
     let rowsWithWords = wordsStore.words.map((word) => (

@@ -1,4 +1,4 @@
-import { makeObservable, observable, action } from "mobx";
+import { makeAutoObservable } from "mobx";
 import { getAllWords, updateWord, addNewWord, deleteWord } from "../api/requests";
 
 class WordStore {
@@ -7,18 +7,12 @@ class WordStore {
     error = null;
 
     constructor() {
-        makeObservable(this, {
-            words: observable,
-            isLoading: observable,
-            load: action,
-            update: action,
-            add: action,
-            delete: action,
-        });
+        makeAutoObservable(this);
     }
 
     load() {
         this.isLoading = true;
+        this.error = null;
         getAllWords()
             .then((response) => {
                 this.words = response;
@@ -31,13 +25,18 @@ class WordStore {
 
     update(newWords, editedWord) {
         this.words = newWords;
+        this.isLoading = true;
+        this.error = null;
         updateWord(editedWord)
             .catch(err => {
                 this.error = err;
             })
+            .finally(() => this.isLoading = false)
     }
 
     add(newWord) {
+        this.isLoading = true;
+        this.error = null;
         addNewWord(newWord)
             .then(response => {
                 if (response.status !== 'Error')
@@ -47,10 +46,13 @@ class WordStore {
             .catch(err => {
                 this.error = err;
             })
+            .finally(() => this.isLoading = false)
     }
 
     delete(id) {
-        if (id)
+        if (id) {
+            this.isLoading = true;
+            this.error = null;
             deleteWord(id)
                 .then(() => {
                     this.words.splice(this.words.indexOf(this.words.find((el) => el.id === id)), 1);
@@ -58,6 +60,8 @@ class WordStore {
                 .catch(err => {
                     this.error = err;
                 })
+                .finally(() => this.isLoading = false)
+        }
     }
 }
 

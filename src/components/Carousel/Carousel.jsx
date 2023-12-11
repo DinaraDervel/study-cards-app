@@ -11,6 +11,7 @@ const Carousel = inject(["wordsStore"])(
 
     useEffect(() => {
       if (!wordsStore.isLoading) wordsStore.load();
+      // eslint-disable-next-line
     }, []);
 
     if (wordsStore.error) {
