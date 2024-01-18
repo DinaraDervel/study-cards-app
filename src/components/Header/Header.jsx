@@ -16,12 +16,12 @@ export default function Header() {
             </li>
             <li>
               <NavLink className={s.table} to="/table">
-                Список слов
+                Words List
               </NavLink>
             </li>
             <li>
               <NavLink className={s.carousel} to="/carousel">
-                Учить слова
+                Learn
               </NavLink>
             </li>
           </ul>

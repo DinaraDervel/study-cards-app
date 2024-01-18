@@ -5,7 +5,7 @@ import Table from './components/Table/Table';
 import NoMatch from './components/NoMatch/NoMatch';
 import { Provider } from 'mobx-react';
 import WordsStore from './stores/WordsStore';
-import './App.css'
+import './App.scss'
 
 
 const stores = {

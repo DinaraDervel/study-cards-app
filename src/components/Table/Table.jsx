@@ -4,6 +4,7 @@ import NoMatch from "../NoMatch/NoMatch";
 import Button from "../Buttons/Button";
 import Row from "./Row/Row";
 import s from "./Table.module.scss";
+import "../../App.scss";
 
 const Table = inject(["wordsStore"])(
   observer(({ wordsStore }) => {
@@ -34,7 +35,11 @@ const Table = inject(["wordsStore"])(
     }
 
     if (wordsStore.isLoading) {
-      return <p>Loading ...</p>;
+      return (
+        <div className="loader-wrapper">
+          <span className="loader"></span>
+        </div>
+      );
     }
 
     const onEditClick = (id) => {
@@ -105,9 +110,9 @@ const Table = inject(["wordsStore"])(
         <table className={s.table}>
           <thead>
             <tr>
-              <th>СЛОВО</th>
-              <th>ТРАНСКРИПЦИЯ</th>
-              <th>ПЕРЕВОД</th>
+              <th>WORD</th>
+              <th>TRANSCRIPTION</th>
+              <th>TRANSLATION</th>
               <th>
                 <Button
                   id={null}

@@ -3,6 +3,7 @@ import { observer, inject } from "mobx-react";
 import Card from "./Card/Card";
 import NoMatch from "../NoMatch/NoMatch";
 import s from "./Carousel.module.scss";
+import "../../App.scss";
 
 const Carousel = inject(["wordsStore"])(
   observer(({ wordsStore }) => {
@@ -20,7 +21,11 @@ const Carousel = inject(["wordsStore"])(
     }
 
     if (wordsStore.isLoading) {
-      return <p>Loading ...</p>;
+      return (
+        <div className="loader-wrapper">
+          <span className="loader"></span>
+        </div>
+      );
     }
 
     const onLeftClick = () => {
